@@ -63,10 +63,12 @@ def deploy_mocks():
     print(f"VRFCoordinator deployed to {vrf_coordinator.address}")
     print("Deployed")
 
-def fund_with_link(contract_address, account=None, link_token=None, amount=Web3.toWei(1, "ether")):
+def fund_with_link(contract_address, account=None, link_token=None, amount=1000000000000000000):
     account = account if account else get_account()
     link_token = link_token if link_token else get_contract("link_token")
-    tx = link_token.transfer(contract_address, amount, {"from": account})
-    tx.wait(1)
-    print(f"Fund contract at {contract_address}!")
-    return tx
+    print(f"here is the link_token: {link_token}")
+    funding_tx = link_token.transfer(contract_address, amount, {"from": account})
+    print(f"here is tx: {funding_tx}")
+    funding_tx.wait(1)
+    print(f"Funded contract at {contract_address}!")
+    return funding_tx

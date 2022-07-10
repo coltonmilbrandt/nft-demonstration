@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity 0.6.6;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
@@ -11,8 +11,8 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
     enum Breed{PUG, SHIBA_INU, ST_BERNARD}
     mapping(uint256 => Breed) public tokenIdToBreed;
     mapping(bytes32 => address) public requestIdToSender;
-    event requestedCollectible(bytes32 indexed requestId, address requester);
-    event breedAssigned(uint256 indexed tokenId, Breed breed);
+    event RequestedCollectible(bytes32 indexed requestId, address requester);
+    event BreedAssigned(uint256 indexed tokenId, Breed breed);
 
     constructor(address _vrfCoordinator, address _linkToken, bytes32 _keyhash, uint256 _fee) public 
     VRFConsumerBase(_vrfCoordinator, _linkToken)
@@ -27,7 +27,7 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
         bytes32 requestId = requestRandomness(keyhash, fee);
         // takes request ID as a key and then whoever sent it as a value
         requestIdToSender[requestId] = msg.sender;
-        emit requestedCollectible(requestId, msg.sender);
+        emit RequestedCollectible(requestId, msg.sender);
     }
 
     function fulfillRandomness(bytes32 requestId, uint256 randomNumber) internal override {
@@ -35,7 +35,7 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
         Breed breed = Breed(randomNumber % 3);
         uint256 newTokenId = tokenCounter;
         tokenIdToBreed[newTokenId] = breed;
-        emit breedAssigned(newTokenId, breed);
+        emit BreedAssigned(newTokenId, breed);
         // msg.sender is the VRFCoordinator, so msg.sender is insufficient, we need the OG caller of createCollectible
         address owner = requestIdToSender[requestId];
         _safeMint(owner, newTokenId);

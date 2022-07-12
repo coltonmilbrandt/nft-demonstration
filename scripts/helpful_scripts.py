@@ -4,7 +4,7 @@ from web3 import Web3
 FORKED_LOCAL_ENVIRONMENTS = ["mainnet-fork", "mainnet-fork-dev"]
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["development", "ganache-local", "local-ganache"]
 OPENSEA_URL = "https://testnets.opensea.io/assets/{}/{}"
-BREED_MAPPING = {0: "PUG", 1: "SHIBA INU", 2: "ST_BERNARD"}
+BREED_MAPPING = {0: "PUG", 1: "SHIBA_INU", 2: "ST_BERNARD"}
 
 def get_breed(breed_number):
     return BREED_MAPPING[breed_number]

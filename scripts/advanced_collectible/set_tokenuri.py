@@ -16,6 +16,7 @@ def main():
         breed = get_breed(advanced_collectible.tokenIdToBreed(token_id))
         tokens_uri = advanced_collectible.tokenURI(token_id)
         print(f"Examining Token ID: {token_id}. URI set to: {tokens_uri}")
+        # Changed from https
         if not tokens_uri.startswith("ipfs://"):
             print(f"Setting tokenURI of {token_id}...")
             set_tokenURI(token_id, advanced_collectible, dog_metadata_dic[breed])

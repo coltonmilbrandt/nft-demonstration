@@ -32,9 +32,9 @@ def main():
             # print(f"Breed list: {breed_list}")
             # print(f"Breed image path list: {breed_list_img_path}")
             files.append(f"('file',('{image_name}',open('{image_path}','rb'),'application/octet-stream'))")
-            pin_to_pinata(image_path, image_name)
+            pin_to_pinata(breed, image_path, image_name)
             
-def pin_to_pinata(image_path, image_name):
+def pin_to_pinata(breed, image_path, image_name):
     # for i in range(len(files)):
     auth_token = os.getenv("PINATA_JWT_TOKEN")
 

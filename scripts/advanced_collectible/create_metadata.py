@@ -3,7 +3,15 @@ from brownie import AdvancedCollectible, network
 from scripts.helpful_scripts import get_breed
 from metadata.sample_metadata import metadata_template
 from pathlib import Path
-import requests
+import requests, json, os
+
+# You might save these to their own file in metadata or something
+
+breed_to_image_uri = {
+    "PUG": "https://ipfs.io/ipfs/QmSsYRx3LpDAb1GZQm7zZ1AuHZjfbPkD6J7s9r41xu1mf8?filename=pug.png",
+    "SHIBA_INU": "https://ipfs.io/ipfs/QmSsYRx3LpDAb1GZQm7zZ1AuHZjfbPkD6J7s9r41xu1mf8?filename=pug.png",
+    "ST_BERNARD": "https://ipfs.io/ipfs/QmUPjADFGEKmfohdTaNcWhp7VGk26h5jXDA7v3VtTnTLcW?filename=st-bernard.png"
+}
 
 def main():
     advanced_collectible = AdvancedCollectible[-1]
@@ -23,7 +31,17 @@ def main():
             collectible_metadata["description"] = f"An adorable {breed} pup!"
             print(collectible_metadata)
             image_path = "./img/" + breed.lower().replace("_", "-") + ".png"
-            image_uri = upload_to_ipfs(image_path)
+            
+            image_uri = None
+            if os.getenv("UPLOAD_IPFS") == "true":
+                image_uri = upload_to_ipfs(image_path)
+            image_uri = image_uri if image_uri else breed_to_image_uri[breed]
+
+            collectible_metadata["image"] = image_uri
+            with open(metadata_file_name, "w") as file:
+                json.dump(collectible_metadata, file)
+            if os.getenv("UPLOAD_IPFS") == "true":
+                upload_to_ipfs(metadata_file_name)
 
 def upload_to_ipfs(filepath):
     # Taking path, opening file with binary "rb", as fp (filepath)

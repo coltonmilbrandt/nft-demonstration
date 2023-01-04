@@ -4,9 +4,9 @@ This repository contains the Solidity contracts and Python/Brownie scripts to cr
 
 ## Table of Contents
 
--   [Installation Instructions](#Installation_Instructions)
--   [Deploy](#Deploy_and_Create)
--   [IPFS](#IPFS)
+-   [Installation Instructions](https://github.com/coltonmilbrandt/nft-demonstration#installation-instructions)
+-   [Deploy](https://github.com/coltonmilbrandt/nft-demonstration#usage)
+-   [IPFS](https://github.com/coltonmilbrandt/nft-demonstration#ipfs)
 
 ## Installation Instructions
 
@@ -31,3 +31,13 @@ In this NFT contract, IPFS is used to store the metadata for each collectible, i
 The set_tokenuri.py script sets the token URI for each NFT collectible to the IPFS address of the metadata file. This URI can then be used to retrieve the metadata for the collectible, including the image URL.
 
 The metadata files are stored on IPFS using the ipfs:// protocol. In the set_tokenuri.py script, the IPFS addresses of the metadata files are stored in the dog_metadata_dic dictionary, with the breed of the dog as the key and the IPFS address as the value. The set_tokenURI function is called with the token ID, the contract, and the IPFS address of the metadata file as arguments, and uses the setTokenURI function to set the URI for the collectible.
+
+# Contact Me
+
+-   Have questions?
+-   Need some help setting up?
+-   Want to contribute?
+
+### Email me at coltonmilbrandt@gmail.com!
+
+### Check out my website [www.coltonmilbrandt.com](https://coltonmilbrandt.com/)

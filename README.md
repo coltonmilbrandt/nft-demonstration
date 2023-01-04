@@ -21,7 +21,7 @@ This repository contains the Solidity contracts and Python/Brownie scripts to cr
 This script deploys the AdvancedCollectible contract and creates a new collectible. To run the script:
 
 ```bash
-python deploy_and_create.py
+brownie run deploy_and_create.py
 ```
 
 ## IPFS

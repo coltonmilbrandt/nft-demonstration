@@ -21,8 +21,10 @@ This repository contains the Solidity contracts and Python/Brownie scripts to cr
 This script deploys the AdvancedCollectible contract and creates a new collectible. To run the script:
 
 ```bash
-brownie run deploy_and_create.py
+brownie run scripts deploy_and_create.py
 ```
+
+> Note: be sure to set your preferred network flag and set up your brownie config
 
 ## IPFS
 
@@ -33,10 +35,6 @@ The set_tokenuri.py script sets the token URI for each NFT collectible to the IP
 The metadata files are stored on IPFS using the ipfs:// protocol. In the set_tokenuri.py script, the IPFS addresses of the metadata files are stored in the dog_metadata_dic dictionary, with the breed of the dog as the key and the IPFS address as the value. The set_tokenURI function is called with the token ID, the contract, and the IPFS address of the metadata file as arguments, and uses the setTokenURI function to set the URI for the collectible.
 
 # Contact Me
-
--   Have questions?
--   Need some help setting up?
--   Want to contribute?
 
 ### Email me at coltonmilbrandt@gmail.com!
 
